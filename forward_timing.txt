@@ -1,0 +1,1 @@
+Layer num= 16 Layer name= 4 Layer inputs= 10 Layer output=10 size=0 stride=0
