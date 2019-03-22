@@ -239,7 +239,7 @@ void forward_network(network *netp)
 		// printf("File opened");
 		// "/data/data/com.termux/files/home/test_c_code"
 		// fp = fopen("/home/nvidia/forward_timing_cpu.txt", "a");
-		fp = open("/data/data/com.termux/files/home/test_c_code/forward_timing.cpu.txt", "a");
+		fp = fopen("/data/data/com.termux/files/home/test_c_code/forward_timing.cpu.txt", "a");
 		fprintf(fp,"Layer num= %d Layer name= %s Layer inputs= %d Layer output=%d size=%d stride=%d, time taken ns=%lu\n", i, l_name[l.type], l.inputs, l.outputs, l.size, l.stride, time_ns);
 
 		printf("Layer num= %d Layer name= %s Layer inputs= %d Layer output=%d size=%d stride=%d, time taken=%lu\n", i, l_name[l.type], l.inputs, l.outputs, l.size, l.stride, time_ns);
@@ -336,7 +336,7 @@ void backward_network(network *netp)
 		FILE *fp;
 		// printf("File opened");
 		// fp = fopen("/home/nvidia/backward_timing_cpu.txt", "a");
-		fp = open("/data/data/com.termux/files/home/test_c_code/backward_timing.cpu.txt", "a");
+		fp = fopen("/data/data/com.termux/files/home/test_c_code/backward_timing.cpu.txt", "a");
 		fprintf(fp,"Layer num= %d Layer name= %s Layer inputs= %d Layer output=%d size=%d stride=%d, time taken ns=%lu\n", i, l_name[l.type], l.inputs, l.outputs, l.size, l.stride, time_ns);
 
 		printf("Layer num= %d Layer name= %s Layer inputs= %d Layer output=%d size=%d stride=%d, time taken=%lu\n", i, l_name[l.type], l.inputs, l.outputs, l.size, l.stride, time_ns);
