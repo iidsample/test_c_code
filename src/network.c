@@ -227,23 +227,23 @@ void forward_network(network *netp)
             fill_cpu(l.outputs * l.batch, 0, l.delta, 1);
         }
 
-		struct timespec start, end;
-		clock_gettime(CLOCK_MONOTONIC, &start);
+		/*struct timespec start, end;*/
+		/*clock_gettime(CLOCK_MONOTONIC, &start);*/
 
         l.forward(l, net);
 
-		clock_gettime(CLOCK_MONOTONIC, &end);
-		size_t time_ns = (end.tv_sec - start.tv_sec)*1000*1000*1000;
-		time_ns += (end.tv_nsec - start.tv_nsec);
-		FILE *fp;
+		/*clock_gettime(CLOCK_MONOTONIC, &end);*/
+		/*size_t time_ns = (end.tv_sec - start.tv_sec)*1000*1000*1000;*/
+		/*time_ns += (end.tv_nsec - start.tv_nsec);*/
+		/*FILE *fp;*/
 		// printf("File opened");
 		// "/data/data/com.termux/files/home/test_c_code"
 		// fp = fopen("/home/nvidia/forward_timing_cpu.txt", "a");
-		fp = fopen("/data/data/com.termux/files/home/test_c_code/forward_timing.cpu.txt", "a");
-		fprintf(fp,"Layer num= %d Layer name= %s Layer inputs= %d Layer output=%d size=%d stride=%d, time taken ns=%lu\n", i, l_name[l.type], l.inputs, l.outputs, l.size, l.stride, time_ns);
+		/*fp = fopen("/data/data/com.termux/files/home/test_c_code/forward_timing.cpu.txt", "a");*/
+		/*fprintf(fp,"Layer num= %d Layer name= %s Layer inputs= %d Layer output=%d size=%d stride=%d, time taken ns=%lu\n", i, l_name[l.type], l.inputs, l.outputs, l.size, l.stride, time_ns);*/
 
-		printf("Layer num= %d Layer name= %s Layer inputs= %d Layer output=%d size=%d stride=%d, time taken=%lu\n", i, l_name[l.type], l.inputs, l.outputs, l.size, l.stride, time_ns);
-		fclose(fp);
+		/*printf("Layer num= %d Layer name= %s Layer inputs= %d Layer output=%d size=%d stride=%d, time taken=%lu\n", i, l_name[l.type], l.inputs, l.outputs, l.size, l.stride, time_ns);*/
+		/*fclose(fp);*/
         net.input = l.output;
         if(l.truth) {
             net.truth = l.output;
@@ -325,22 +325,22 @@ void backward_network(network *netp)
         }
         net.index = i;
 		
-		struct timespec start, end;
-		clock_gettime(CLOCK_MONOTONIC, &start);
+		/*struct timespec start, end;*/
+		/*clock_gettime(CLOCK_MONOTONIC, &start);*/
 
         l.backward(l, net);
 
-		clock_gettime(CLOCK_MONOTONIC, &end);
-		size_t time_ns = (end.tv_sec - start.tv_sec)*1000*1000*1000;
-		time_ns += (end.tv_nsec - start.tv_nsec);
-		FILE *fp;
+		/*clock_gettime(CLOCK_MONOTONIC, &end);*/
+		/*size_t time_ns = (end.tv_sec - start.tv_sec)*1000*1000*1000;*/
+		/*time_ns += (end.tv_nsec - start.tv_nsec);*/
+		/*FILE *fp;*/
 		// printf("File opened");
 		// fp = fopen("/home/nvidia/backward_timing_cpu.txt", "a");
-		fp = fopen("/data/data/com.termux/files/home/test_c_code/backward_timing.cpu.txt", "a");
-		fprintf(fp,"Layer num= %d Layer name= %s Layer inputs= %d Layer output=%d size=%d stride=%d, time taken ns=%lu\n", i, l_name[l.type], l.inputs, l.outputs, l.size, l.stride, time_ns);
+		/*fp = fopen("/data/data/com.termux/files/home/test_c_code/backward_timing.cpu.txt", "a");*/
+		/*fprintf(fp,"Layer num= %d Layer name= %s Layer inputs= %d Layer output=%d size=%d stride=%d, time taken ns=%lu\n", i, l_name[l.type], l.inputs, l.outputs, l.size, l.stride, time_ns);*/
 
-		printf("Layer num= %d Layer name= %s Layer inputs= %d Layer output=%d size=%d stride=%d, time taken=%lu\n", i, l_name[l.type], l.inputs, l.outputs, l.size, l.stride, time_ns);
-		fclose(fp);
+		/*printf("Layer num= %d Layer name= %s Layer inputs= %d Layer output=%d size=%d stride=%d, time taken=%lu\n", i, l_name[l.type], l.inputs, l.outputs, l.size, l.stride, time_ns);*/
+		/*fclose(fp);*/
     }
 }
 
@@ -349,10 +349,50 @@ float train_network_datum(network *net)
     *net->seen += net->batch;
     net->train = 1;
 	printf("Trained is done here\n");
+
+    struct timespec start, stop;
+    clock_gettime(CLOCK_MONOTONIC, &start);
     forward_network(net);
+    clock_gettime(CLOCK_MONOTONIC, &stop);
+    size_t time_ms = (stop.tv_sec - start.tv_sec) *1000*1000;
+    time_ms += (stop.tv_nsec - start.tv_sec)/1000;
+
+    // starting time cal for backward
+    
+    clock_gettime(CLOCK_MONOTONIC, &start);
     backward_network(net);
+    clock_gettime(CLOCK_MONOTONIC, &stop);
+    size_t time_ms_backward = (stop.tv_sec - start.tv_sec) *1000*1000;
+    time_ms_backward += (stop.tv_nsec - start.tv_sec)/1000;
+
+    FILE *fp;
+    /*printf("File opened");*/
+    fp = fopen("./total_back_time.txt", "a");
+    /*fp = fopen("/data/data/com.termux/files/home/test_c_code/backward_timing.cpu.txt", "a");*/
+    fprintf(fp,"%lu\n", time_ms_backward);
+    fclose(fp);
+
+    fp = fopen("./total_forward_time.txt", "a");
+    /*fp = fopen("/data/data/com.termux/files/home/test_c_code/backward_timing.cpu.txt", "a");*/
+    fprintf(fp,"%lu\n", time_ms);
+    fclose(fp);
     float error = *net->cost;
+  
+    // time for update
+    clock_gettime(CLOCK_MONOTONIC, &start);
+
     if(((*net->seen)/net->batch)%net->subdivisions == 0) update_network(net);
+
+    clock_gettime(CLOCK_MONOTONIC, &stop);
+    
+    size_t time_ms_update = (stop.tv_sec - start.tv_sec) * 1000 * 1000;
+    time_ms_update += (stop.tv_nsec - start.tv_nsec)/1000;
+
+    fp = fopen("./total_update_time.txt", "a");
+    /*fp = fopen("/data/data/com.termux/files/home/test_c_code/backward_timing.cpu.txt", "a");*/
+    fprintf(fp,"%lu\n", time_ms_update);
+    fclose(fp);
+
     return error;
 }
 
@@ -835,8 +875,8 @@ void forward_network_gpu(network *netp)
         if(l.delta_gpu){
             fill_gpu(l.outputs * l.batch, 0, l.delta_gpu, 1);
         }
-		struct timespec start, end;
-		clock_gettime(CLOCK_MONOTONIC, &start);
+		/*struct timespec start, end;*/
+		/*clock_gettime(CLOCK_MONOTONIC, &start);*/
         l.forward_gpu(l, net);
         net.input_gpu = l.output_gpu;
         net.input = l.output;
@@ -845,17 +885,17 @@ void forward_network_gpu(network *netp)
             net.truth_gpu = l.output_gpu;
             net.truth = l.output;
         }
-		clock_gettime(CLOCK_MONOTONIC, &end);
-		size_t time_ns = (end.tv_sec - start.tv_sec)*1000*1000*1000;
-		time_ns += (end.tv_nsec - start.tv_nsec);
+		/*clock_gettime(CLOCK_MONOTONIC, &end);*/
+		/*size_t time_ns = (end.tv_sec - start.tv_sec)*1000*1000*1000;*/
+		/*time_ns += (end.tv_nsec - start.tv_nsec);*/
 
-		FILE *fp;
+		/*FILE *fp;*/
 		// printf("File opened");
-		fp = fopen("/home/nvidia/forward_timing_gpu.txt", "a");
-		fprintf(fp,"Layer num= %d Layer name= %s Layer inputs= %d Layer output=%d size=%d stride=%d, time taken ns=%lu\n", i, l_name[l.type], l.inputs, l.outputs, l.size, l.stride, time_ns);
+		/*fp = fopen("/home/nvidia/forward_timing_gpu.txt", "a");*/
+		/*fprintf(fp,"Layer num= %d Layer name= %s Layer inputs= %d Layer output=%d size=%d stride=%d, time taken ns=%lu\n", i, l_name[l.type], l.inputs, l.outputs, l.size, l.stride, time_ns);*/
 
-		printf("Layer num= %d Layer name= %s Layer inputs= %d Layer output=%d size=%d stride=%d, time taken=%lu\n", i, l_name[l.type], l.inputs, l.outputs, l.size, l.stride, time_ns);
-		fclose(fp);
+		/*printf("Layer num= %d Layer name= %s Layer inputs= %d Layer output=%d size=%d stride=%d, time taken=%lu\n", i, l_name[l.type], l.inputs, l.outputs, l.size, l.stride, time_ns);*/
+		/*fclose(fp);*/
 
 		//printf("Time taken = %d\n");
     }
@@ -883,20 +923,20 @@ void backward_network_gpu(network *netp)
         }
         net.index = i;
 		
-		struct timespec start, end;
-		clock_gettime(CLOCK_MONOTONIC, &start);
+		/*struct timespec start, end;*/
+		/*clock_gettime(CLOCK_MONOTONIC, &start);*/
         l.backward_gpu(l, net);
 
-		clock_gettime(CLOCK_MONOTONIC, &end);
-		size_t time_ns = (end.tv_sec - start.tv_sec)*1000*1000*1000;
-		time_ns += (end.tv_nsec - start.tv_nsec);
-		FILE *fp;
+		/*clock_gettime(CLOCK_MONOTONIC, &end);*/
+		/*size_t time_ns = (end.tv_sec - start.tv_sec)*1000*1000*1000;*/
+		/*time_ns += (end.tv_nsec - start.tv_nsec);*/
+		/*FILE *fp;*/
 		// printf("File opened");
-		fp = fopen("/home/nvidia/backward_timing_gpu.txt", "a");
-		fprintf(fp,"Layer num= %d Layer name= %s Layer inputs= %d Layer output=%d size=%d stride=%d, time taken ns=%lu\n", i, l_name[l.type], l.inputs, l.outputs, l.size, l.stride, time_ns);
+		/*fp = fopen("/home/nvidia/backward_timing_gpu.txt", "a");*/
+		/*fprintf(fp,"Layer num= %d Layer name= %s Layer inputs= %d Layer output=%d size=%d stride=%d, time taken ns=%lu\n", i, l_name[l.type], l.inputs, l.outputs, l.size, l.stride, time_ns);*/
 
-		printf("Layer num= %d Layer name= %s Layer inputs= %d Layer output=%d size=%d stride=%d, time taken=%lu\n", i, l_name[l.type], l.inputs, l.outputs, l.size, l.stride, time_ns);
-		fclose(fp);
+		/*printf("Layer num= %d Layer name= %s Layer inputs= %d Layer output=%d size=%d stride=%d, time taken=%lu\n", i, l_name[l.type], l.inputs, l.outputs, l.size, l.stride, time_ns);*/
+		/*fclose(fp);*/
     }
 }
 
