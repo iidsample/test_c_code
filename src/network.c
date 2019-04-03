@@ -355,7 +355,7 @@ float train_network_datum(network *net)
     forward_network(net);
     clock_gettime(CLOCK_MONOTONIC, &stop);
     size_t time_ms = (stop.tv_sec - start.tv_sec) *1000*1000;
-    time_ms += (stop.tv_nsec - start.tv_sec)/1000;
+    time_ms += (stop.tv_nsec - start.tv_nsec)/1000;
 
     // starting time cal for backward
     
@@ -363,17 +363,17 @@ float train_network_datum(network *net)
     backward_network(net);
     clock_gettime(CLOCK_MONOTONIC, &stop);
     size_t time_ms_backward = (stop.tv_sec - start.tv_sec) *1000*1000;
-    time_ms_backward += (stop.tv_nsec - start.tv_sec)/1000;
+    time_ms_backward += (stop.tv_nsec - start.tv_nsec)/1000;
 
     FILE *fp;
     /*printf("File opened");*/
-    fp = fopen("./total_back_time.txt", "a");
-    /*fp = fopen("/data/data/com.termux/files/home/test_c_code/backward_timing.cpu.txt", "a");*/
+    /*fp = fopen("./total_back_time.txt", "a");*/
+    fp = fopen("/data/data/com.termux/files/home/test_c_code/backward_timing_all_layer.txt", "a");
     fprintf(fp,"%lu\n", time_ms_backward);
     fclose(fp);
 
-    fp = fopen("./total_forward_time.txt", "a");
-    /*fp = fopen("/data/data/com.termux/files/home/test_c_code/backward_timing.cpu.txt", "a");*/
+    /*fp = fopen("./total_forward_time.txt", "a");*/
+    fp = fopen("/data/data/com.termux/files/home/test_c_code/forward_timing_all_layer.txt", "a");
     fprintf(fp,"%lu\n", time_ms);
     fclose(fp);
     float error = *net->cost;
@@ -389,7 +389,7 @@ float train_network_datum(network *net)
     time_ms_update += (stop.tv_nsec - start.tv_nsec)/1000;
 
     fp = fopen("./total_update_time.txt", "a");
-    /*fp = fopen("/data/data/com.termux/files/home/test_c_code/backward_timing.cpu.txt", "a");*/
+    fp = fopen("/data/data/com.termux/files/home/test_c_code/update_timing_all_layer.txt", "a");
     fprintf(fp,"%lu\n", time_ms_update);
     fclose(fp);
 
