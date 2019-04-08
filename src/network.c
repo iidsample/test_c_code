@@ -390,8 +390,8 @@ float train_network_datum(network *net)
     size_t time_ms_update = (stop.tv_sec - start.tv_sec);
     time_ms_update += (stop.tv_nsec - start.tv_nsec)/(1000*1000*1000);
 
-    fp = fopen("./total_update_time.txt", "a");
-    /*fp = fopen("/data/data/com.termux/files/home/test_c_code/update_timing_all_layer.txt", "a");*/
+    /*fp = fopen("./total_update_time.txt", "a");*/
+    fp = fopen("/data/data/com.termux/files/home/test_c_code/update_timing_all_layer.txt", "a");
     fprintf(fp,"%lu\n", time_ms_update);
     fclose(fp);
 
