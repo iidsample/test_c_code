@@ -371,7 +371,7 @@ float train_network_datum(network *net)
     /*fp = fopen("./total_back_time.txt", "a");*/
     fp = fopen("/data/data/com.termux/files/home/test_c_code/backward_timing_all_layer.txt", "a");
     fprintf(fp,"%lu\n", time_ms_backward);
-    fprintf(fp, "timing from what function = %f\n", new_time);
+    /*fprintf(fp, "timing from what function = %f\n", new_time);*/
     fclose(fp);
 
     /*fp = fopen("./total_forward_time.txt", "a");*/
