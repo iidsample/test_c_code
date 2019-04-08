@@ -138,8 +138,17 @@ void train_classifier(char *datacfg, char *cfgfile, char *weightfile, int *gpus,
         } else {
             loss = train_networks(nets, ngpus, train, 4);
         }
-#else
+#else   
+        printf("This calls the training function\n");
+        double total_time = what_time_is_it_now();
         loss = train_network(net, train);
+        double final_time = what_time_is_it_now()-total_time;
+        
+        FILE *out;
+        out = fopen("/data/data/com.termux/files/home/test_c_code/total_time_all.txt","a");
+        fprintf(out, "%f\n", final_time);
+        fclose(out);
+
 #endif
         if(avg_loss == -1) avg_loss = loss;
         avg_loss = avg_loss*.9 + loss*.1;
