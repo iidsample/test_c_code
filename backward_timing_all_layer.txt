@@ -1,16 +1,38 @@
-79
-timing from what function = 79.204570
-95
-timing from what function = 95.589776
-102
-timing from what function = 102.513438
-102
-timing from what function = 102.496213
-104
-timing from what function = 103.433513
-109
-timing from what function = 108.673493
-102
-timing from what function = 102.507979
-114
-timing from what function = 114.244352
+84
+timing from what function = 665.203957
+86
+timing from what function = 1065.490427
+89
+timing from what function = 3184.088308
+85
+timing from what function = 6591.692214
+88
+timing from what function = 14286.057166
+87
+timing from what function = 15054.892093
+82
+timing from what function = 133.662844
+89
+timing from what function = 3549.033576
+116
+timing from what function = 16234.808817
+128
+timing from what function = 27018.579960
+119
+timing from what function = 21522.538780
+123
+timing from what function = 22199.795733
+122
+timing from what function = 21012.538789
+106
+timing from what function = 11712.252651
+101
+timing from what function = 9963.762744
+123
+timing from what function = 20806.302898
+110
+timing from what function = 16442.829225
+88
+timing from what function = 8504.104930
+86
+timing from what function = 2916.588194
