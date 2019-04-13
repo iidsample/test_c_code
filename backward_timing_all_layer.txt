@@ -36,3 +36,233 @@ timing from what function = 16442.829225
 timing from what function = 8504.104930
 86
 timing from what function = 2916.588194
+0
+timing from what function = 0.000029
+0
+timing from what function = 0.000032
+0
+timing from what function = 0.000043
+0
+timing from what function = 0.000043
+0
+timing from what function = 0.000044
+0
+timing from what function = 0.000044
+0
+timing from what function = 0.000042
+0
+timing from what function = 0.000043
+0
+timing from what function = 0.000045
+0
+timing from what function = 0.000044
+0
+timing from what function = 0.000043
+0
+timing from what function = 0.000036
+0
+timing from what function = 0.000043
+0
+timing from what function = 0.000046
+0
+timing from what function = 0.000043
+0
+timing from what function = 0.000043
+0
+timing from what function = 0.000044
+0
+timing from what function = 0.000044
+0
+timing from what function = 0.000043
+0
+timing from what function = 0.000043
+0
+timing from what function = 0.000041
+0
+timing from what function = 0.000043
+0
+timing from what function = 0.000041
+0
+timing from what function = 0.000045
+0
+timing from what function = 0.000045
+0
+timing from what function = 0.000043
+0
+timing from what function = 0.000043
+0
+timing from what function = 0.000043
+0
+timing from what function = 0.000052
+0
+timing from what function = 0.000044
+0
+timing from what function = 0.000044
+0
+timing from what function = 0.000090
+0
+timing from what function = 0.000043
+0
+timing from what function = 0.000037
+0
+timing from what function = 0.000042
+0
+timing from what function = 0.000043
+0
+timing from what function = 0.000041
+0
+timing from what function = 0.000043
+0
+timing from what function = 0.000044
+0
+timing from what function = 0.000042
+0
+timing from what function = 0.000046
+0
+timing from what function = 0.000042
+0
+timing from what function = 0.000041
+0
+timing from what function = 0.000043
+0
+timing from what function = 0.000045
+0
+timing from what function = 0.000042
+0
+timing from what function = 0.000044
+0
+timing from what function = 0.000043
+0
+timing from what function = 0.000044
+0
+timing from what function = 0.000043
+0
+timing from what function = 0.000043
+0
+timing from what function = 0.000045
+0
+timing from what function = 0.000042
+0
+timing from what function = 0.000043
+0
+timing from what function = 0.000043
+0
+timing from what function = 0.000046
+0
+timing from what function = 0.000045
+0
+timing from what function = 0.000043
+0
+timing from what function = 0.000043
+0
+timing from what function = 0.000037
+0
+timing from what function = 0.000045
+0
+timing from what function = 0.000042
+0
+timing from what function = 0.000046
+0
+timing from what function = 0.000043
+0
+timing from what function = 0.000044
+0
+timing from what function = 0.000039
+0
+timing from what function = 0.000030
+0
+timing from what function = 0.000032
+0
+timing from what function = 0.000044
+0
+timing from what function = 0.000044
+0
+timing from what function = 0.000044
+0
+timing from what function = 0.000043
+0
+timing from what function = 0.000043
+0
+timing from what function = 0.000043
+0
+timing from what function = 0.000043
+0
+timing from what function = 0.000043
+0
+timing from what function = 0.000043
+0
+timing from what function = 0.000044
+0
+timing from what function = 0.000043
+0
+timing from what function = 0.000037
+0
+timing from what function = 0.000044
+0
+timing from what function = 0.000043
+0
+timing from what function = 0.000042
+0
+timing from what function = 0.000043
+0
+timing from what function = 0.000044
+0
+timing from what function = 0.000042
+0
+timing from what function = 0.000043
+0
+timing from what function = 0.000043
+0
+timing from what function = 0.000043
+0
+timing from what function = 0.000044
+0
+timing from what function = 0.000043
+0
+timing from what function = 0.000042
+0
+timing from what function = 0.000044
+0
+timing from what function = 0.000043
+0
+timing from what function = 0.000043
+0
+timing from what function = 0.000042
+0
+timing from what function = 0.000043
+0
+timing from what function = 0.000044
+0
+timing from what function = 0.000112
+0
+timing from what function = 0.000040
+0
+timing from what function = 0.000044
+0
+timing from what function = 0.000043
+0
+timing from what function = 0.000043
+0
+timing from what function = 0.000043
+0
+timing from what function = 0.000042
+0
+timing from what function = 0.000043
+0
+timing from what function = 0.000044
+0
+timing from what function = 0.000045
+0
+timing from what function = 0.000043
+0
+timing from what function = 0.000042
+0
+timing from what function = 0.000042
+0
+timing from what function = 0.000043
+0
+timing from what function = 0.000043
+0
+timing from what function = 0.000042
+0
+timing from what function = 0.000045
